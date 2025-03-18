@@ -1,3 +1,5 @@
+#GITHUB: https://github.com/indr3kk/automang_martin_mitt
+
 import pygame
 import random
 
