@@ -1,5 +1,3 @@
-#GITHUB: https://github.com/indr3kk/automang_martin_mitt
-
 import pygame
 import random
 
@@ -24,7 +22,7 @@ def game_loop():
         screen.blit(taust, (0, 0))
         screen.blit(punane_auto, (punane_x, punane_y))
 
-        # Skoori kuvamine
+        # punktid
         skoor_tekst = font.render(f"Skoor: {str(skoor)}", True, (255, 255, 255))
         screen.blit(skoor_tekst, (10, 10))
 
@@ -35,9 +33,9 @@ def game_loop():
 
         # Punase auto liikumine
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] and punane_x > 200:
+        if keys[pygame.K_LEFT] and punane_x > 150:
             punane_x -= kiirus
-        if keys[pygame.K_RIGHT] and punane_x < 400 - punane_auto.get_width():
+        if keys[pygame.K_RIGHT] and punane_x < 500 - punane_auto.get_width():
             punane_x += kiirus
 
         # Siniste autode liikumine ja kokkupõrke tuvastamine
@@ -48,7 +46,6 @@ def game_loop():
                 auto[0] = random.choice([200, 300, 400])
                 auto[2] = random.randint(2, 5)
                 skoor += 1
-
             screen.blit(sinine_auto, (auto[0], auto[1]))
 
             # Kokkupõrke kontroll
@@ -96,6 +93,9 @@ try:
     taust = pygame.image.load("bg_rally.jpg")  # Lisa taustapildi fail
     punane_auto = pygame.image.load("f1_red.png")
     sinine_auto = pygame.image.load("f1_blue.png")
+
+    # Pööra autod tagurpidi
+    sinine_auto = pygame.transform.rotate(sinine_auto, 180)
 except pygame.error as e:
     print(f"Pildifaili laadimise viga: {e}")
     pygame.quit()
